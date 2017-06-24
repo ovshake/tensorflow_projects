@@ -7,12 +7,12 @@ prices = []
 def get_data(filename):
 	with open(filename,'r') as csvFile:
 		csvFileReader = csv.reader(csvFile)
-		print(csvFileReader)
 		next(csvFileReader)
-		for i in range(1,7):
-			row = csvFileReader[i]
-			dates.append(int(row[2].split("-")[0]))
-			prices.append(float(row[4]))
+		print(cs)
+		for row in csvFileReader:
+			dates.append(int(row[0].split("-")[0]))
+			prices.append(float(row[1]))
+	return
 def predict_prices(dates, prices, x):
 	dates = np.reshape(dates,(len(dates),1))
 
@@ -35,6 +35,6 @@ def predict_prices(dates, prices, x):
 
 	return svr_poly.predict(x)[0], svr_rbf.predict(x)[0], svr_lin.predict(x)[0] 
 
-get_data('icici.csv')
+get_data('aapl.csv')
 predicted_prices = predict_prices(dates, prices,29)
 print(predicted_prices)
